@@ -4,25 +4,35 @@ const shortid = require('shortid');
 const schema = require('../model/schema');
 
 app.post('/', async (req, res) => {
-    // await res.render('index')
     const { longUrl } = req.body;
-    console.log(longUrl);
+    // console.log(longUrl);
 
-    // generating shortid
-    const shortCode = shortid.generate();
-    const shortUrl = `http://localhost:5000/` + shortCode;
-    console.log(shortUrl, shortCode);
+    const item = schema.findOne({ longUrl: longUrl })
+        .then((url) => {
+            if (url) {
+                console.log(url.longUrl);
+                res.send(`you have already created short url with this link.`)
+            } else {
+                // generating shortid
+                const shortCode = shortid.generate();
+                const shortUrl = `http://localhost:5000/` + shortCode;
+                console.log(shortUrl, shortCode);
+                let myData = new schema({
+                    longUrl,
+                    shortCode,
+                    shortUrl
+                });
 
+                myData.save(function (err) {
+                    if (err) console.log(`err: ${err.message}`);
+                })
+            }
+        }).catch((err) => {
+            console.error(err);
+        });
 
-    let myData = new schema({
-        longUrl,
-        shortCode,
-        shortUrl
-    });
+    return item;
 
-    myData.save(function (err) {
-        if (err) console.log(`err: ${err.message}`);
-    })
     res.redirect('/');
 })
 
@@ -33,7 +43,7 @@ app.get('/:id', async (req, res) => {
         if (item) {
             return res.redirect(item.longUrl);
         } else {
-            return res.send(`Error occured.`);
+            return res.send(`Error occured. No URL found with this id.`);
         }
     } catch (err) {
         return res.status(500).json(`Server technical error: ${err.message}`);
