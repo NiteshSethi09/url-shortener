@@ -8,7 +8,7 @@ const ejs = require('ejs');
 
 // Database Connection
 mongoose
-    .connect('', {
+    .connect('mongodb+srv://nitesh:nitesh00@project1-xeny0.mongodb.net/test?retryWrites=true&w=majority', {
         useNewUrlParser: true
     })
     .then(() => console.log('mongodb connection established.'))
