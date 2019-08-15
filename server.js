@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const path = require('path');
 const PORT = 5000;
 const bodyParser = require('body-parser');
-const ejs = require('ejs');
 
 // Database Connection
 mongoose
@@ -18,8 +16,11 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
 // making views folder static
-app.use(express.static(__dirname + '/views'));
+// app.use(express.static(__dirname + '/views'));
 
 // importing routes
 try {
