@@ -5,9 +5,9 @@ const schema = require('../model/schema');
 
 app.post('/', async (req, res) => {
     const { longUrl } = req.body;
-    // console.log(longUrl);
+    res.render('index');
 
-    const item = schema.findOne({ longUrl: longUrl })
+    return schema.findOne({ longUrl: longUrl })
         .then((url) => {
             if (url) {
                 console.log(url.longUrl);
@@ -26,14 +26,12 @@ app.post('/', async (req, res) => {
                 myData.save(function (err) {
                     if (err) console.log(`err: ${err.message}`);
                 })
+                res.redirect('/');
             }
-        }).catch((err) => {
+        })
+        .catch((err) => {
             console.error(err);
         });
-
-    return item;
-
-    res.redirect('/');
 })
 
 app.get('/:id', async (req, res) => {
