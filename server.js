@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 // making views folder static
-// app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/views'));
 
 // importing routes
 try {

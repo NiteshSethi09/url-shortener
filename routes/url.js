@@ -1,17 +1,22 @@
 const express = require('express');
-const app = express();
+const router = express.Router();
 const shortid = require('shortid');
 const schema = require('../model/schema');
 
-app.post('/', async (req, res) => {
-    const { longUrl } = req.body;
+router.get('/', (req, res) => {
     res.render('index');
+});
 
+router.post('/', async (req, res) => {
+    const { longUrl } = req.body;
     return schema.findOne({ longUrl: longUrl })
         .then((url) => {
             if (url) {
                 console.log(url.longUrl);
-                res.send(`you have already created short url with this link.`)
+                // res.send(`you have already created short url with this link.`)
+                // res.render('index', {
+                //     link: url.longUrl
+                // });
             } else {
                 // generating shortid
                 const shortCode = shortid.generate();
@@ -32,9 +37,9 @@ app.post('/', async (req, res) => {
         .catch((err) => {
             console.error(err);
         });
-})
+});
 
-app.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const urlCode = req.params.id;
         const item = await schema.findOne({ shortCode: urlCode });
@@ -46,6 +51,6 @@ app.get('/:id', async (req, res) => {
     } catch (err) {
         return res.status(500).json(`Server technical error: ${err.message}`);
     }
-})
+});
 
-module.exports = app;
+module.exports = router;
