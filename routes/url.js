@@ -12,11 +12,9 @@ router.post('/', async (req, res) => {
     return schema.findOne({ longUrl: longUrl })
         .then((url) => {
             if (url) {
-                console.log(url.longUrl);
-                // res.send(`you have already created short url with this link.`)
-                // res.render('index', {
-                //     link: url.longUrl
-                // });
+                res.render('index', {
+                    link: url.shortUrl
+                });
             } else {
                 // generating shortid
                 const shortCode = shortid.generate();
@@ -31,13 +29,15 @@ router.post('/', async (req, res) => {
                 myData.save(function (err) {
                     if (err) console.log(`err: ${err.message}`);
                 })
-                res.redirect('/');
+                res.render('index', {
+                    link: url.shortUrl
+                });
             }
         })
         .catch((err) => {
             console.error(err);
         });
-});
+})
 
 router.get('/:id', async (req, res) => {
     try {
@@ -51,6 +51,6 @@ router.get('/:id', async (req, res) => {
     } catch (err) {
         return res.status(500).json(`Server technical error: ${err.message}`);
     }
-});
+})
 
 module.exports = router;
