@@ -10,26 +10,38 @@ body {
     justify-content: center;
 }
 
-form {
+.container-main {
+    margin: 3em 0;
+}
+
+.title-heading {
+    font-size: 1.1rem;
     width: 500px;
-    height: 157px;
-    margin-top: 100px;
+    margin: 1.4em 0;
+    display: flex;
+    justify-content: center;
+}
+
+.title-heading h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.form-container {
+    width: 500px;
     border: 1px solid #b1b1b1;
     border-radius: 5px;
-    /* background: saddlebrown; */
 }
 
 .info {
     display: flex;
     justify-content: center;
-    /* background: salmon; */
 }
 
 .info input[type='text'] {
     width: 380px;
-    height: 44px;
+    height: 2.6em;
     font-size: 1rem;
-    margin: 1.6em 0;
+    margin: 1.2em 0;
     border: none;
     border: 1px solid #afafaf;
     border-radius: 5px;
@@ -39,17 +51,40 @@ form {
 .button-submit {
     display: flex;
     justify-content: center;
-    /* background: aqua; */
 }
 
 .button-submit input[type='submit'] {
     width: 90px;
     height: 35px;
     border: none;
-    margin: 1em 0;
+    margin: 1.3em 0;
     cursor: pointer;
     background: #007bff;
     border-radius: 4px;
     color: #eee;
     font-weight: 600;
+}
+
+.link-conatiner {
+    display: flex;
+    justify-content: center;
+}
+
+.url-link {
+    width: 300px;
+    height: 44px;
+    font-size: 1rem;
+    margin: 1.2em 0;
+    border: none;
+    border: 1px solid #afafaf;
+    border-radius: 5px;
+    display: flex;
+}
+
+.short-link {
+    font-size: 1.1rem;
+    text-decoration: none;
+    line-height: 44px;
+    padding: 0 1em;
+    color: #0236b9;
 }

@@ -6,20 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/index.css">
-    <title>Home Page</title>
+    <title>Url Shortener</title>
 </head>
 
 <body>
-    <form action="/" method="POST">
-        <div class="info">
-            <input type="text" name="longUrl" placeholder="Enter link">
+    <div id="container-main" class="container-main">
+        <div class="title-heading">
+            <h1>URL SHORTENER</h1>
         </div>
-        <div class="button-submit">
-            <input type="submit" name="button" value="Get link">
+        <form action="/" method="POST" class="form-container">
+            <div class="info">
+                <input type="text" name="longUrl" placeholder="Enter link">
+            </div>
+            <div class="button-submit">
+                <input type="submit" name="button" value="Get link">
+            </div>
+        </form>
+        <div class="link-conatiner">
+            <div class="url-link">
+                <% if(typeof link !== 'undefined') { %>
+                <a href="<%= link %>" target="_blank" class="short-link"><%= link %></a>
+                <% } %>
+            </div>
         </div>
-    </form>
-    <div class="url-link">
-        <a href="<%= link %> " target="_blank"> <%= link %> </a>
     </div>
 </body>
 
