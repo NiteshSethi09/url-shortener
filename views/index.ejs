@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./css/index.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./css/index.css" />
     <title>Url Shortener</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="container-main" class="container-main">
-        <div class="title-heading">
-            <h1>URL SHORTENER</h1>
+      <div class="title-heading">
+        <h1>URL SHORTENER</h1>
+      </div>
+      <form action="/" method="POST" class="form-container">
+        <div class="info">
+          <input type="text" name="longUrl" placeholder="Enter link" />
+          <input type="submit" name="button" value="Get link" />
         </div>
-        <form action="/" method="POST" class="form-container">
-            <div class="info">
-                <input type="text" name="longUrl" placeholder="Enter link">
-            </div>
-            <div class="button-submit">
-                <input type="submit" name="button" value="Get link">
-            </div>
-        </form>
-        <div class="link-conatiner">
-            <div class="url-link">
-                <% if(typeof link !== 'undefined') { %>
-                <a href="<%= link %>" target="_blank" class="short-link"><%= link %></a>
-                <% } %>
-            </div>
-        </div>
+      </form>
+      <div class="link-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Longurl</th>
+              <th>Shorturl</th>
+              <th>Expires In</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% urls.forEach(url => { %>
+            <tr>
+              <td><%= url.longUrl %></td>
+              <td>
+                <a href="<%= url.shortUrl %>" target="_blank"
+                  ><%= url.shortUrl %></a
+                >
+              </td>
+              <td><%= url.urlExpires %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
