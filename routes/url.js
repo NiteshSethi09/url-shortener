@@ -4,7 +4,7 @@ const shortid = require("shortid");
 const schema = require("../model/schema");
 
 router.get("/", async (req, res) => {
-  const urls = await schema.find();
+  const urls = await schema.find().sort({ date: -1 }); // sort function used to display latest created url at the top of the table.
   res.render("index", {
     urls: urls
   });
