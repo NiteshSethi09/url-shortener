@@ -12,17 +12,18 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { longUrl } = req.body;
+  const urls = await schema.find().sort({ date: -1 });
   return await schema
     .findOne({ longUrl: longUrl })
     .then(url => {
       if (url) {
         res.render("index", {
-          link: url.shortUrl
+          urls
         });
       } else {
         // generating shortid
         const shortCode = shortid.generate();
-        const shortUrl = `http://localhost:5000/` + shortCode;
+        const shortUrl = `http://localhost:5000/${shortCode}`;
         console.log(shortUrl, shortCode);
         let myData = new schema({
           longUrl,
